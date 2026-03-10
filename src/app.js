@@ -22,7 +22,10 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:8080", // your frontend
+    origin: [
+      "http://localhost:8080",
+      "http://10.205.15.217:8080"  // Allow external IP access
+    ],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -39,7 +42,11 @@ app.use("/api/dm", dmRoutes);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: [
+      "http://localhost:8080",
+      "http://10.205.15.217:8080"  // Allow external IP access
+    ],
+    credentials: true,
   },
 });
 
@@ -47,6 +54,6 @@ io.use(socketAuth);
 
 chatSocket(io);
 
-server.listen(process.env.PORT, () => {
-  console.log(`Chat service running on port ${process.env.PORT}`);
+server.listen(process.env.PORT, '0.0.0.0', () => {
+  console.log(`Chat service running on port ${process.env.PORT} (accessible externally)`);
 });

@@ -14,15 +14,18 @@ exports.getChannels = async (req, res) => {
 
 exports.createChannel = async (req, res) => {
   try {
-    const { serverId, name } = req.body;
+    const { serverId, name, type = "text", category = "general" } = req.body;
 
     const channel = await Channel.create({
       name,
       serverId,
+      type,
+      category,
     });
 
     res.status(201).json(channel);
   } catch (error) {
+    console.error("Channel create error:", error);
     res.status(500).json({ message: "Channel create error" });
   }
 };

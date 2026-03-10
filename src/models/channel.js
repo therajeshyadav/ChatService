@@ -13,8 +13,12 @@ const channelSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["text"],
+      enum: ["text", "voice"],
       default: "text",
+    },
+    category: {
+      type: String,
+      default: "general",
     },
   },
   { timestamps: true }
