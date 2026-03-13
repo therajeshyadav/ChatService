@@ -54,7 +54,7 @@ const io = new Server(server, {
   },
 });
 
-app.options("*", cors()); 
+app.use(cors());
 
 io.use(socketAuth);
 
