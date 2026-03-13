@@ -23,8 +23,10 @@ connectDB();
 app.use(
   cors({
     origin: [
-      process.env.FRONTEND_URL || "http://localhost:8080",
-      "http://10.205.15.217:8080"  // Allow external IP access for development
+      process.env.FRONTEND_URL,
+      "https://nexus-chat-topaz.vercel.app",
+      "https://nexuschat.duckdns.org",
+      "http://localhost:8080",
     ],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -43,8 +45,10 @@ app.use("/api/dm", dmRoutes);
 const io = new Server(server, {
   cors: {
     origin: [
-      process.env.FRONTEND_URL || "http://localhost:8080",
-      "http://10.205.15.217:8080"  // Allow external IP access for development
+       process.env.FRONTEND_URL,
+      "https://nexus-chat-topaz.vercel.app",
+      "https://nexuschat.duckdns.org",
+      "http://localhost:8080"
     ],
     credentials: true,
   },
@@ -54,6 +58,8 @@ io.use(socketAuth);
 
 chatSocket(io);
 
-server.listen(process.env.PORT, '0.0.0.0', () => {
-  console.log(`Chat service running on port ${process.env.PORT} (accessible externally)`);
+server.listen(process.env.PORT, "0.0.0.0", () => {
+  console.log(
+    `Chat service running on port ${process.env.PORT} (accessible externally)`,
+  );
 });
