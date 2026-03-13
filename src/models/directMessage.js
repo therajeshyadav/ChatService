@@ -18,6 +18,6 @@ const directMessageSchema = new mongoose.Schema(
 );
 
 // Ensure only 2 participants
-directMessageSchema.index({ participants: 1 }, { unique: true });
+directMessageSchema.index({ participants: 1 });
 
 module.exports = mongoose.model("DirectMessage", directMessageSchema);
