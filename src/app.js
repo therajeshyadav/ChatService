@@ -54,6 +54,8 @@ const io = new Server(server, {
   },
 });
 
+app.options("*", cors()); 
+
 io.use(socketAuth);
 
 chatSocket(io);
