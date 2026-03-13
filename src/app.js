@@ -23,8 +23,8 @@ connectDB();
 app.use(
   cors({
     origin: [
-      "http://localhost:8080",
-      "http://10.205.15.217:8080"  // Allow external IP access
+      process.env.FRONTEND_URL || "http://localhost:8080",
+      "http://10.205.15.217:8080"  // Allow external IP access for development
     ],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -43,8 +43,8 @@ app.use("/api/dm", dmRoutes);
 const io = new Server(server, {
   cors: {
     origin: [
-      "http://localhost:8080",
-      "http://10.205.15.217:8080"  // Allow external IP access
+      process.env.FRONTEND_URL || "http://localhost:8080",
+      "http://10.205.15.217:8080"  // Allow external IP access for development
     ],
     credentials: true,
   },
